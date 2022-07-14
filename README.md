@@ -9,12 +9,13 @@ Create an Edge VPC network on a new or existing VPC. This network is set up to a
 ## Table of Contents
 
 1. [Edge VPC](#edge-vpc)
-2. [Address Prefixes](#address-prefixes)
-3. [Network ACL](#network-acl)
+2. [Public Gateways](#public-gateways)
+3. [Address Prefixes](#address-prefixes)
+4. [Network ACL](#network-acl)
     - [Default Allow Rules](#default-allow-rules)
     - [Default Deny Rules](#default-deny-rules)
-4. [Subnets](#subnets)
-5. [Module Variables](#module-variables)
+5. [Subnets](#subnets)
+6. [Module Variables](#module-variables)
 
 ---
 
