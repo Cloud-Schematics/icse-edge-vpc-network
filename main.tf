@@ -21,6 +21,28 @@ locals {
 ##############################################################################
 
 ##############################################################################
+# Create Public Gateways
+##############################################################################
+
+module "public_gateways" {
+  source            = "github.com/Cloud-Schematics/vpc-public-gateway-module"
+  prefix            = var.prefix
+  vpc_id            = local.vpc_id
+  region            = var.region
+  resource_group_id = var.resource_group_id
+  public_gateways = {
+    for zone in [1, 2, 3] :
+    "zone-${zone}" => true if(
+      var.existing_public_gateways["zone-${zone}"] == null # no gateway in that zone
+      && var.create_public_gateways == true                # create gateways is true
+      && zone <= var.zones                                 # zone is less than or equal to total
+    )
+  }
+}
+
+##############################################################################
+
+##############################################################################
 # Create Address Prefixes
 ##############################################################################
 
@@ -79,10 +101,16 @@ module "subnets" {
       : [
         for tier in local.create_tier_list :
         {
-          name           = "edge-${tier}-zone-${zone}"
-          cidr           = local.subnet_tiers["zone-${zone}"][tier]
-          public_gateway = false
-          acl_name       = "edge-acl"
+          name     = "edge-${tier}-zone-${zone}"
+          cidr     = local.subnet_tiers["zone-${zone}"][tier]
+          acl_name = "edge-acl"
+          public_gateway = (
+            tier != "bastion"
+            ? null
+            : var.existing_public_gateways["zone-${zone}"] == null
+            ? module.public_gateways.gateways["zone-${zone}"]
+            : var.existing_public_gateways["zone-${zone}"]
+          )
         } if tier != "bastion" || (tier == "bastion" && zone <= var.bastion_subnet_zones)
       ]
     )

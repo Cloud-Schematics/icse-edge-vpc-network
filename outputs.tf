@@ -12,6 +12,11 @@ output "network_acl" {
   value       = module.network_acl.acls
 }
 
+output "public_gateways" {
+  description = "Edge VPC public gateways"
+  value       = module.public_gateways.gateways
+}
+
 output "subnet_zone_list" {
   description = "List of subnet ids, cidrs, names, and zones."
   value       = module.subnets.subnet_zone_list

@@ -63,6 +63,26 @@ variable "zones" {
   }
 }
 
+variable "existing_public_gateways" {
+  description = "Use existing public gateways for VPC id if not creating. If creating a new VPC this value will be ignored."
+  type = object({
+    zone-1 = string
+    zone-2 = string
+    zone-3 = string
+  })
+  default = {
+    zone-1 = null
+    zone-2 = null
+    zone-3 = null
+  }
+}
+
+variable "create_public_gateways" {
+  description = "Create public gateways on the VPC. Public gateways will be created in each zone where an existing public gateway id has not been passed in using the `existing_public_gateways` variable. Public gateways will not be created in zones greater than the `zones` variable."
+  type        = bool
+  default     = true
+}
+
 ##############################################################################
 
 ##############################################################################
