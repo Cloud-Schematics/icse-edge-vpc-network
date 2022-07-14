@@ -79,7 +79,7 @@ module "subnets" {
       : [
         for tier in local.create_tier_list :
         {
-          name           = "edge-${tier}"
+          name           = "edge-${tier}-zone-${zone}"
           cidr           = local.subnet_tiers["zone-${zone}"][tier]
           public_gateway = false
           acl_name       = "edge-acl"
