@@ -119,5 +119,6 @@ vpn_firewall_type          | string                                             
 
 Name             | Description
 ---------------- | --------------------------------------------
+vpc_id           | ID for edge VPC
 network_acl      | Network ACL name and ID
 subnet_zone_list | List of subnet ids, cidrs, names, and zones.
