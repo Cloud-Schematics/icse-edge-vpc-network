@@ -1,6 +1,6 @@
 # Edge VPC Network Module
 
-Create an Edge VPC network on a new or existing VPC. This network is set up to allow users to deploy F5 instances.
+Create an Edge VPC network on a new or existing VPC. This network is set up to allow users to deploy F5 Big IP instances.
 
 ---
 
