@@ -83,7 +83,7 @@ module "subnets" {
           cidr           = local.subnet_tiers["zone-${zone}"][tier]
           public_gateway = false
           acl_name       = "edge-acl"
-        }
+        } if tier != "bastion" || (tier == "bastion" && zone <= var.bastion_subnet_zones)
       ]
     )
   }

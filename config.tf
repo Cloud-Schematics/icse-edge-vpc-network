@@ -23,7 +23,7 @@ locals {
     var.create_vpn_1_subnet_tier == true ? ["vpn-1"] : [],
     var.create_vpn_2_subnet_tier == true ? ["vpn-2"] : [],
     local.vpn_firewall_types[var.vpn_firewall_type],
-    var.create_bastion_subnet_tier == true ? ["bastion"] : [],
+    var.bastion_subnet_zones > 0 ? ["bastion"] : [],
     var.create_vpe_subnet_tier == true ? ["vpe"] : []
   ])
 

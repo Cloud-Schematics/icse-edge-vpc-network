@@ -158,10 +158,15 @@ variable "create_vpn_2_subnet_tier" {
   default     = true
 }
 
-variable "create_bastion_subnet_tier" {
-  description = "Create Bastion subnet tier."
-  type        = bool
-  default     = false
+variable "bastion_subnet_zones" {
+  description = "Create Bastion subnet tier for each zone in this list. Bastion subnets created cannot exceed number of zones in `var.zones`."
+  type        = number
+  default     = 0
+
+  validation {
+    error_message = "Bastion subnet zones can be 0, 1, 2, or 3."
+    condition     = var.bastion_subnet_zones >= 0 && var.bastion_subnet_zones < 4
+  }
 }
 
 ##############################################################################
