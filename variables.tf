@@ -72,7 +72,7 @@ variable "zones" {
 variable "add_cluster_rules" {
   description = "Automatically add needed ACL rules to allow each network to create and manage Openshift and IKS clusters."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "global_inbound_allow_list" {
