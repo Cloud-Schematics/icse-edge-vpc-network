@@ -93,6 +93,14 @@ module "subnets" {
   vpc_id                      = local.vpc_id
   use_manual_address_prefixes = true
   network_acls                = module.network_acl.acls
+  public_gateways             = {
+    for zone in [1,2,3]:
+    "zone-${zone}" => {
+      var.existing_public_gateways["zone-${zone}"] == null
+      ? module.public_gateways.gateways["zone-${zone}"]
+      : var.existing_public_gateways["zone-${zone}"]
+    }
+  }
   subnets = {
     for zone in [1, 2, 3] :
     "zone-${zone}" => (
@@ -106,10 +114,8 @@ module "subnets" {
           acl_name = "edge-acl"
           public_gateway = (
             tier != "bastion"
-            ? null
-            : var.existing_public_gateways["zone-${zone}"] == null
-            ? module.public_gateways.gateways["zone-${zone}"]
-            : var.existing_public_gateways["zone-${zone}"]
+            ? false
+            : true
           )
         } if tier != "bastion" || (tier == "bastion" && zone <= var.bastion_subnet_zones)
       ]
