@@ -119,3 +119,16 @@ module "subnets" {
 }
 
 ##############################################################################
+
+##############################################################################
+# Get subnets for each interface
+##############################################################################
+
+module "subnets_by_tier" {
+  source           = "github.com/Cloud-Schematics/get-subnets"
+  for_each         = toset(local.all_subnet_tiers)
+  subnet_zone_list = module.subnets.subnet_zone_list
+  regex            = each.key
+}
+
+##############################################################################

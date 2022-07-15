@@ -23,3 +23,17 @@ output "subnet_zone_list" {
 }
 
 ##############################################################################
+
+##############################################################################
+# Subnets by tier
+##############################################################################
+
+output "subnet_tiers" {
+  description = "Map of subnet tiers where each key contains the subnet zone list for that tier."
+  value = {
+    for tier in local.all_subnet_tiers :
+    (tier) => module.subnets_by_tier[tier].subnets
+  }
+}
+
+##############################################################################

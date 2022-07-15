@@ -139,3 +139,4 @@ vpc_id           | ID for edge VPC
 network_acl      | Network ACL name and ID
 public_gateways  | Edge VPC public gateways
 subnet_zone_list | List of subnet ids, cidrs, names, and zones.
+subnet_tiers     | Map of subnet tiers where each key contains the subnet zone list for that tier.
