@@ -113,7 +113,7 @@ module "subnets" {
           cidr     = local.subnet_tiers["zone-${zone}"][tier]
           acl_name = "edge-acl"
           public_gateway = (
-            tier != "bastion" && tier != "edge"
+            tier != "bastion" && tier != "f5-external"
             ? false
             : true
           )
