@@ -7,6 +7,11 @@ output "vpc_id" {
   value       = var.vpc_id == null ? ibm_is_vpc.edge_vpc[0].id : null
 }
 
+output "vpc_crn" {
+  description = "CRN of edge VPC"
+  value       = var.vpc_id == null ? ibm_is_vpc.edge_vpc[0].crn : null
+}
+
 output "network_acl" {
   description = "Network ACL name and ID"
   value       = module.network_acl.acls
