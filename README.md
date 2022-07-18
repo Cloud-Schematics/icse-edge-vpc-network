@@ -30,7 +30,7 @@ Using this module users can create a new edge VPC or provision network component
 
 ## Public Gateways
 
-Users can optionally create public gateways in their existing VPCs. Public gateways will be attached to `"bastion"` tier subnets.
+Users can optionally create public gateways in their existing VPCs. Public gateways will be attached to `"bastion"` and `"f5-external"` tier subnets.
 
 ### Public Gateway Variables
 
